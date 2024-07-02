@@ -1,0 +1,23 @@
+---
+app:
+  name: crew-application
+  port: 3000
+
+ingress:
+  host: crew12345.com
+
+render:
+  replicas: 3
+  image: us-west1-docker.pkg.dev/dazzling-spirit-426406-m4/image-repo/crew-backend:v1
+  port: 80
+
+render_communication_service:
+  port: 8088
+
+backend_communication_service:
+  port: 8089
+
+backend_services:
+  replicas: 2
+  image: us-west1-docker.pkg.dev/dazzling-spirit-426406-m4/image-repo/crew-backend:v1
+  port: 8080

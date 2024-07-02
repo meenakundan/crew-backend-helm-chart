@@ -1,0 +1,4 @@
+apiVersion: v1
+name: crew-application
+description: A Helm chart for deploying the crew application.
+version: 0.1.0

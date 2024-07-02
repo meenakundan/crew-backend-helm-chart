@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-services-deployment
+spec:
+  replicas: {{.Values.backend_services.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.app.name}}-backend
+  template:
+    metadata:
+      labels:
+        app: {{.Values.app.name}}-backend
+    spec:
+      imagePullSecrets:
+        - name: artifact-registry-secret
+      containers:
+        - name: backend-services-container
+          image: {{.Values.backend_services.image}}
+          ports:
+            - containerPort: {{.Values.app.port}}

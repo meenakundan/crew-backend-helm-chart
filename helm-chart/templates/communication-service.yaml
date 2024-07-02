@@ -1,0 +1,36 @@
+# ---          # render-communication-service
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: render-communication-service
+# 	labels:
+# 		app: render-communication-service
+# spec:
+#   selector:
+#     app: backend # name of pods to communicate with
+#   ports:
+#     - protocol: TCP
+#       port: {{.Values.render_communication_service.port}}
+#       targetPort: {{.Values.backend_services.port}} # Port on the backend pods where the websocket service is running
+# 	type: ClusterIP
+# 	sessionAffinity: ClientIP
+# # Additional configurations maybe required to enable websocket protocol or configure connection timeouts.
+
+# ---
+
+# # backend-communication-service
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: backend-communication-service
+#   labels:
+#     app: backend-communication-service
+# spec:
+#   selector:
+#     app: backend # Name of pods to communicate with (backend)
+#   ports:
+#     - protocol: TCP
+#       port: {{.Values.backend_communication_service.port}}  # Port exposed by the service
+#       targetPort: {{.Values.render.port}}
+#   type: ClusterIP
+#   sessionAffinity: ClientIP
